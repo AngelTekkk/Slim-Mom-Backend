@@ -4,7 +4,7 @@ const { validateBody, authenticate } = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 
-const { mealSchema } = require("../../schemas");
+const { mealSchema, dailyMealsSchema } = require("../../schemas");
 
 const ctrl = require("../../controllers");
 
@@ -17,7 +17,12 @@ router.post(
   ctrlWrapper(ctrl.addMeal)
 );
 
-router.post("/getdailymeals", authenticate, ctrlWrapper(ctrl.getDailyMeals));
+router.post(
+  "/getdailymeals",
+  authenticate,
+  validateBody(dailyMealsSchema),
+  ctrlWrapper(ctrl.getDailyMeals)
+);
 
 router.delete("/:mealId", authenticate, ctrlWrapper(ctrl.removeMeal));
 

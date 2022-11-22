@@ -7,7 +7,7 @@ const {
 
 const { personalDataSchema } = require("./products");
 
-const { mealSchema } = require("./dailyNutrition");
+const { mealSchema, dailyMealsSchema } = require("./dailyNutrition");
 
 module.exports = {
   registerSchema,
@@ -16,4 +16,5 @@ module.exports = {
   // resendEmailSchema,
   personalDataSchema,
   mealSchema,
+  dailyMealsSchema,
 };

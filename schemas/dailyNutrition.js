@@ -7,9 +7,12 @@ const mealSchema = Joi.object({
 });
 
 const dailyMealsSchema = Joi.object({
-  date: Joi.date().required(),
+  date: Joi.date()
+    .required()
+    .messages({ "date.base": "Date should look like YYYY-MM-DD" }),
 });
 
 module.exports = {
   mealSchema,
+  dailyMealsSchema,
 };
