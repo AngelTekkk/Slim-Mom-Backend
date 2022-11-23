@@ -28,7 +28,7 @@ const googleCallback = async (
     }
     const hashPassword = await bcrypt.hash(uuidv4(), 10);
     const newUser = await User.create({
-      name: displayName,
+      name: displayName.trim(),
       email,
       password: hashPassword,
     });

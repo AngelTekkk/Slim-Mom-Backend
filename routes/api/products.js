@@ -17,7 +17,7 @@ router.get("/:product", ctrlWrapper(ctrl.findOneProduct));
 router.post("/diet", validateBody(personalDataSchema), ctrlWrapper(ctrl.diet));
 
 router.post(
-  "/personalDiet",
+  "/personaldiet",
   authenticate,
   validateBody(personalDataSchema),
   ctrlWrapper(ctrl.personalDiet)

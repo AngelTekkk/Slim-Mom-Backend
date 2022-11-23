@@ -18,14 +18,14 @@ const dailyIntakeControllerForUser = async (req, res, next) => {
       [`groupBloodNotAllowed.${bloodType}`]: true,
     },
     {
-      title: `$title.ru`,
+      title: `$title.ua`,
     }
   );
 
   const dailyIntake = {
     calories: dailyCaloriesCalculate.toFixed(),
     notAllowedProduct: result.map(
-      ({ title = "Sorry we dont find title" }) => title
+      ({ title = "Sorry we don`t find title" }) => title
     ),
   };
 
