@@ -6,6 +6,7 @@ require("dotenv").config();
 const authRouter = require("./routes/api/auth");
 const productsRouter = require("./routes/api/products");
 const dailyNutritionsRouter = require("./routes/api/dailyNutritions");
+const dailyIntakeRouter = require("./routes/api/dailyIntakeRoutes");
 
 const app = express();
 
@@ -18,6 +19,8 @@ app.use(express.json());
 app.use("/api/users", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/dailynutritions", dailyNutritionsRouter);
+
+app.use("/api/daily-intake", dailyIntakeRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

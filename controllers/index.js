@@ -11,6 +11,8 @@ const personalDiet = require("./products/personalDiet");
 const addMeal = require("./dailyNutritions/addMeal");
 const removeMeal = require("./dailyNutritions/removeMeal");
 const getDailyMeals = require("./dailyNutritions/getDailyMeals");
+const dailyIntakeController = require("./dailyIntake/dailyIntakeController");
+const dailyIntakeControllerForUser = require("./dailyIntake/dailyIntakeControllerForUser");
 
 module.exports = {
   register,
@@ -24,4 +26,6 @@ module.exports = {
   addMeal,
   removeMeal,
   getDailyMeals,
+  dailyIntakeController,
+  dailyIntakeControllerForUser,
 };
