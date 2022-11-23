@@ -9,6 +9,8 @@ const { personalDataSchema } = require("./products");
 
 const { mealSchema, dailyMealsSchema } = require("./dailyNutrition");
 
+const { dailyIntakeJoiSchema } = require("./dailyIntakeJoiSchema");
+
 module.exports = {
   registerSchema,
   loginSchema,
@@ -17,4 +19,5 @@ module.exports = {
   personalDataSchema,
   mealSchema,
   dailyMealsSchema,
+  dailyIntakeJoiSchema,
 };
