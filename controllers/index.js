@@ -2,6 +2,7 @@ const register = require("./auth/register");
 const login = require("./auth/login");
 const logout = require("./auth/logout");
 const refresh = require("./auth/refresh");
+const googleAuth = require("./auth/googleAuth");
 
 const productsList = require("./products/productsList");
 const findOneProduct = require("./products/findOneProduct");
@@ -17,6 +18,7 @@ module.exports = {
   login,
   logout,
   refresh,
+  googleAuth,
   productsList,
   findOneProduct,
   diet,
