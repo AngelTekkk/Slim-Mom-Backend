@@ -17,7 +17,7 @@ const dailyIntakeController = async (req, res, next) => {
       [`groupBloodNotAllowed.${bloodType}`]: true,
     },
     {
-      title: `$title.ru`,
+      title: `$title.ua`,
     }
   );
 
