@@ -22,7 +22,6 @@ const facebookParams = {
 const facebookCallback = async (accessToken, refreshToken, profile, done) => {
   try {
     const { emails, displayName } = profile;
-    console.log("displayName: ", displayName);
     const email = emails[0].value;
     // const photo = photos[0].value;
     // const avatarURL = photo || gravatar.url(email);
