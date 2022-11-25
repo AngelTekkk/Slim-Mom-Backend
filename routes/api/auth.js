@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { validateBody, authenticate, passport } = require("../../middlewares");
+const { validateBody, authenticate, authSocial } = require("../../middlewares");
 
 const { ctrlWrapper } = require("../../helpers");
 
@@ -29,15 +29,24 @@ router.post("/refresh", validateBody(refreshSchema), ctrlWrapper(ctrl.refresh));
 
 router.get(
   "/google",
-  passport.authenticate("google", { scope: ["email profile"] })
+  authSocial.authenticate("google", { scope: ["email", "profile"] })
 );
 
 router.get(
   "/google/callback",
-  passport.authenticate("google", { session: false }),
+  authSocial.authenticate("google", { session: false }),
   ctrlWrapper(ctrl.googleAuth)
 );
 
+router.get(
+  "/facebook",
+  authSocial.authenticate("facebook", { scope: ["email", "public_profile"] })
+);
+router.get(
+  "/facebook/callback",
+  authSocial.authenticate("facebook", { session: false }),
+  ctrlWrapper(ctrl.facebookAuth)
+);
 // router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
 
 // router.post(

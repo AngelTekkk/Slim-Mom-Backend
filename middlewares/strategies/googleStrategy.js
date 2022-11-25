@@ -1,6 +1,5 @@
-const passport = require("passport");
 const { Strategy } = require("passport-google-oauth2");
-const { User } = require("../models");
+const { User } = require("../../models");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcryptjs");
 
@@ -40,6 +39,4 @@ const googleCallback = async (
 
 const googleStrategy = new Strategy(googleParams, googleCallback);
 
-passport.use("google", googleStrategy);
-
-module.exports = passport;
+module.exports = googleStrategy;
