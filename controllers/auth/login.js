@@ -34,6 +34,7 @@ const login = async (req, res) => {
     accessToken,
     refreshToken,
     user: { email: user.email, name: user.name },
+    dailyDiet: user.dailyDiet,
   });
 
   // res.json({

@@ -26,11 +26,11 @@ const userSchema = new Schema(
     },
     personalData: {
       type: Object,
-      default: {},
+      default: null,
     },
     dailyDiet: {
       type: Object,
-      default: {},
+      default: null,
     },
     // verify: {
     //   type: Boolean,
