@@ -3,6 +3,7 @@ const login = require("./auth/login");
 const logout = require("./auth/logout");
 const refresh = require("./auth/refresh");
 const googleAuth = require("./auth/googleAuth");
+const facebookAuth = require("./auth/facebookAuth");
 
 const productsList = require("./products/productsList");
 const findOneProduct = require("./products/findOneProduct");
@@ -22,6 +23,7 @@ module.exports = {
   logout,
   refresh,
   googleAuth,
+  facebookAuth,
   productsList,
   findOneProduct,
   diet,

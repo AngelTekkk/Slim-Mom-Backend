@@ -1,9 +1,9 @@
 const validateBody = require("./validateBody");
 const authenticate = require("./authenticate");
-const passport = require("./passport");
+const authSocial = require("./authSocial");
 
 module.exports = {
   validateBody,
   authenticate,
-  passport,
+  authSocial,
 };
