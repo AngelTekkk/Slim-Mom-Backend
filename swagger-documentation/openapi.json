@@ -7,29 +7,27 @@
     "contact": {
       "email": "mlightpro@gmail.com"
     },
-    "version": "1.0.0"
+    "version": "1.0.4"
   },
   "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
+    "description": "Slim-Mom - Website",
+    "url": "https://Slim-Mom-Frontend"
   },
   "servers": [
     {
-      "url": "https://slim-mom-backend-node.herokuapp.com"
+      "url": "https://Slim-Mom-Frontend"
     }
   ],
   "tags": [
     {
-      "name": "O",
-      "description": "perations about sign-up, sign-in, sign-out and refresh token"
+      "name": "Endpoints",
+      "description": ""
     }
   ],
   "paths": {
     "/api/users/signup": {
       "post": {
-        "tags": [
-          "AUTH ENDPOINTS. REGISTER"
-        ],
+        "tags": ["AUTH ENDPOINTS. Register"],
         "summary": "user registration",
         "description": "Create new user",
         "operationId": "CreateUser",
@@ -66,19 +64,14 @@
             }
           },
           "409": {
-            "description": "Conflict. This user already exists."
-          },
-          "422": {
-            "description": "No correct data"
+            "description": "Email in use."
           }
         }
       }
     },
     "/api/users/login": {
       "post": {
-        "tags": [
-          "login"
-        ],
+        "tags": ["login"],
         "summary": "user authentication into the system",
         "description": "Login User",
         "operationId": "LoginUser",
@@ -118,20 +111,41 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid username/password supplied"
-          },
-          "404": {
-            "description": "This user is not in our database"
+          "401": {
+            "description": "Email or password is wrong"
+          }
+        }
+      }
+    },
+    "/api/users/google": {
+      "get": {
+        "tags": ["googleAuth"],
+        "summary": "user authentication into the system via google service",
+        "description": "Login User",
+        "operationId": "googleLogin",
+        "responses": {
+          "302": {
+            "description": "Found"
+          }
+        }
+      }
+    },
+    "/api/users/facebook": {
+      "get": {
+        "tags": ["facebookAuth"],
+        "summary": "user authentication into the system via facebook service",
+        "description": "Login User",
+        "operationId": "facebookUser",
+        "responses": {
+          "302": {
+            "description": "Found"
           }
         }
       }
     },
     "/api/users/logout": {
       "get": {
-        "tags": [
-          "logout"
-        ],
+        "tags": ["logout"],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -155,9 +169,7 @@
     },
     "/api/users/refresh": {
       "post": {
-        "tags": [
-          "refresh"
-        ],
+        "tags": ["refresh"],
         "summary": "Automatically update accessToken after it expires",
         "description": "Refresh Token",
         "operationId": "refreshToken",
@@ -187,15 +199,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Validation exception"
           }
         }
       }
     },
     "/api/products/": {
       "post": {
-        "tags": [
-          "PRODUCT ENDPOINTS. GET PRODUCT LIST"
-        ],
+        "tags": ["PRODUCT ENDPOINTS. Get products list"],
         "summary": "Get an array of product names products List",
         "description": "",
         "operationId": "getProductsList",
@@ -211,7 +224,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -231,15 +244,16 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Product not found"
           }
         }
       }
     },
     "/api/products/:{product}": {
       "get": {
-        "tags": [
-          "GET PRODACT INFO"
-        ],
+        "tags": ["Get product info"],
         "summary": "Get information about one product",
         "description": "",
         "operationId": "getProductData",
@@ -285,12 +299,6 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid product name supplied"
-          },
-          "401": {
-            "description": "Validation exception"
-          },
           "404": {
             "description": "Product not found"
           }
@@ -299,9 +307,7 @@
     },
     "/api/products/diet": {
       "post": {
-        "tags": [
-          "GET CALORIES for Unregister user"
-        ],
+        "tags": ["Get calories for Unregister user"],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
         "operationId": "getCaloriesAndListUnregisterUser",
@@ -342,9 +348,6 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid product name supplied"
-          },
           "404": {
             "description": "Product not found"
           }
@@ -353,9 +356,7 @@
     },
     "/api/products/persondaldiet": {
       "post": {
-        "tags": [
-          "GET CALORIES for Register user"
-        ],
+        "tags": ["Get calories for Register user"],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
         "operationId": "getCaloriesAndList",
@@ -407,9 +408,6 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid product name supplied"
-          },
           "404": {
             "description": "Product not found"
           }
@@ -418,9 +416,7 @@
     },
     "/api/dailynutritions/addmeal": {
       "post": {
-        "tags": [
-          "ADD MEAL"
-        ],
+        "tags": ["Add meal"],
         "summary": "Get info about product",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getCalories",
@@ -457,7 +453,7 @@
           "required": true
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Successful operation",
             "content": {
               "application/json": {
@@ -472,21 +468,16 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid meal name supplied"
-          },
           "404": {
-            "description": "Product not found"
+            "description": "This product does not exist in the database"
           }
         }
       }
     },
     "/api/dailynutritions/getdailymeals": {
       "post": {
-        "tags": [
-          "GET DAILY MEALS"
-        ],
-        "summary": "Get info about product",
+        "tags": ["Get daily meals"],
+        "summary": "Get info about product for a specific day",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getDailyMeals",
         "parameters": [
@@ -543,17 +534,15 @@
               }
             }
           },
-          "400": {
-            "description": "Invalid meal name supplied"
+          "404": {
+            "description": "Not found"
           }
         }
       }
     },
-    "/api/dailynutritions/:{mealId}": {
+    "/api/dailynutritions/removeMeal/:{mealId}": {
       "delete": {
-        "tags": [
-          "DELETE"
-        ],
+        "tags": ["Delete product by ID"],
         "summary": "Delete purchase product by ID",
         "description": "",
         "operationId": "deleteProduct",
@@ -578,14 +567,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Delete sucsesful"
-          },
-          "400": {
-            "description": "Invalid ID supplied"
+          "200": {
+            "description": "Meal deleted"
           },
           "404": {
-            "description": "mealId not found"
+            "description": "Not found"
           }
         }
       }
@@ -594,11 +580,7 @@
   "components": {
     "schemas": {
       "Register": {
-        "required": [
-          "name",
-          "email",
-          "password"
-        ],
+        "required": ["name", "email", "password"],
         "type": "object",
         "properties": {
           "name": {
@@ -616,10 +598,7 @@
         }
       },
       "RegisterResp": {
-        "required": [
-          "name",
-          "email"
-        ],
+        "required": ["name", "email"],
         "type": "object",
         "properties": {
           "name": {
@@ -666,10 +645,7 @@
         }
       },
       "Refresh": {
-        "required": [
-          "accessToken",
-          "refreshToken"
-        ],
+        "required": ["accessToken", "refreshToken"],
         "type": "object",
         "properties": {
           "accessToken": {
