@@ -12,9 +12,21 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
+// const corsOptions = {
+//   origin: "http://localhost:3000/registration",
+//   credentials: true,
+//   optionSuccessStatus: 200,
+// };
+
 app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 app.use("/api/users", authRouter);
 app.use("/api/products", productsRouter);
