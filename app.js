@@ -28,9 +28,12 @@ app.use(logger(formatsLogger));
 app.use(cors());
 app.use(express.json());
 
+// app.use(express.static("swagger-documentation"));
+
 app.use("/api/users", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/dailynutritions", dailyNutritionsRouter);
+app.use("/api/swagger", express.static("swagger-documentation"));
 
 app.use("/api/daily-intake", dailyIntakeRouter);
 
