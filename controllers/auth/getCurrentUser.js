@@ -10,13 +10,15 @@ const { ACCESS_TOKEN_SECRET_KEY } = process.env;
 // const { SECRET_KEY } = process.env;
 
 const getCurrentUser = async (req, res) => {
-  const { accessToken: token } = req.body;
-  console.log(token);
+  const { authorization = "" } = req.headers;
+  const [bearer, token] = authorization.split(" ");
+  if (bearer !== "Bearer") {
+    throw RequestError(401);
+  }
   const { id } = jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
   const user = await User.findById(id);
-
   if (!user) {
-    throw RequestError(401, "Email or password is wrong");
+    throw RequestError(401, "Invalid signature");
   }
 
   // if (!user.verify) {
@@ -29,8 +31,6 @@ const getCurrentUser = async (req, res) => {
   // await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    accessToken: user.accessToken,
-    refreshToken: user.refreshToken,
     user: { email: user.email, name: user.name },
     dailyDiet: user.dailyDiet,
   });
