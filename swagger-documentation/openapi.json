@@ -1,0 +1,820 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger Slim Moms - OpenAPI 3.0",
+    "description": "Diet service.",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "mlightpro@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [
+    {
+      "url": "https://slim-mom-backend-node.herokuapp.com"
+    }
+  ],
+  "tags": [
+    {
+      "name": "O",
+      "description": "perations about sign-up, sign-in, sign-out and refresh token"
+    }
+  ],
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": [
+          "AUTH ENDPOINTS. REGISTER"
+        ],
+        "summary": "user registration",
+        "description": "Create new user",
+        "operationId": "CreateUser",
+        "requestBody": {
+          "description": "Here is what you have to write during registration",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "User has been successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterResp"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict. This user already exists."
+          },
+          "422": {
+            "description": "No correct data"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "user authentication into the system",
+        "description": "Login User",
+        "operationId": "LoginUser",
+        "parameters": [
+          {
+            "name": "examplename",
+            "in": "query",
+            "description": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "description": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User successful authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResp"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          },
+          "404": {
+            "description": "This user is not in our database"
+          }
+        }
+      }
+    },
+    "/api/users/logout": {
+      "get": {
+        "tags": [
+          "logout"
+        ],
+        "summary": "Logs out current logged in user session",
+        "description": "",
+        "operationId": "logoutUser",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User successful unauthorized"
+          }
+        }
+      }
+    },
+    "/api/users/refresh": {
+      "post": {
+        "tags": [
+          "refresh"
+        ],
+        "summary": "Automatically update accessToken after it expires",
+        "description": "Refresh Token",
+        "operationId": "refreshToken",
+        "parameters": [
+          {
+            "name": "Refresh Token",
+            "in": "query",
+            "description": "Refresh Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Refresh"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/": {
+      "post": {
+        "tags": [
+          "PRODUCT ENDPOINTS. GET PRODUCT LIST"
+        ],
+        "summary": "Get an array of product names products List",
+        "description": "",
+        "operationId": "getProductsList",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/stringInArray"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/stringInArray"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/products/:{product}": {
+      "get": {
+        "tags": [
+          "GET PRODACT INFO"
+        ],
+        "summary": "Get information about one product",
+        "description": "",
+        "operationId": "getProductData",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "product",
+            "in": "path",
+            "description": "Add name of product",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product name supplied"
+          },
+          "401": {
+            "description": "Validation exception"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/api/products/diet": {
+      "post": {
+        "tags": [
+          "GET CALORIES for Unregister user"
+        ],
+        "summary": "Send anthropometry to get daily calorie",
+        "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
+        "operationId": "getCaloriesAndListUnregisterUser",
+        "requestBody": {
+          "description": "Here you need to enter anthropometry",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnthropometryResp"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnthropometryResp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product name supplied"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/api/products/persondaldiet": {
+      "post": {
+        "tags": [
+          "GET CALORIES for Register user"
+        ],
+        "summary": "Send anthropometry to get daily calorie",
+        "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
+        "operationId": "getCaloriesAndList",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Here you need to enter anthropometry",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/Anthropometry"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnthropometryResp"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnthropometryResp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid product name supplied"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/api/dailynutritions/addmeal": {
+      "post": {
+        "tags": [
+          "ADD MEAL"
+        ],
+        "summary": "Get info about product",
+        "description": "You send information about the date, product, grams and get info about product in diery",
+        "operationId": "getCalories",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Here you add date, product, grams to diery",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMeal"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMeal"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/AddMeal"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddMealResp"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddMealResp"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid meal name supplied"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/api/dailynutritions/getdailymeals": {
+      "post": {
+        "tags": [
+          "GET DAILY MEALS"
+        ],
+        "summary": "Get info about product",
+        "description": "You send information about the date, product, grams and get info about product in diery",
+        "operationId": "getDailyMeals",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Here you send the date and get products from diery",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DailyMeals"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/DailyMeals"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/DailyMeals"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddMealResp"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AddMealResp"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid meal name supplied"
+          }
+        }
+      }
+    },
+    "/api/dailynutritions/:{mealId}": {
+      "delete": {
+        "tags": [
+          "DELETE"
+        ],
+        "summary": "Delete purchase product by ID",
+        "description": "",
+        "operationId": "deleteProduct",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "mealId",
+            "in": "path",
+            "description": "ID of the order that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Delete sucsesful"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "mealId not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Register": {
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "examplename"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "RegisterResp": {
+        "required": [
+          "name",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "examplename"
+          },
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          }
+        }
+      },
+      "LoginResp": {
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "user",
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cC"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "user@example.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "qwerty123"
+              }
+            }
+          }
+        }
+      },
+      "Refresh": {
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cC"
+          },
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6Ikp"
+          }
+        }
+      },
+      "stringInArray": {
+        "type": "string"
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "5d51694802b2373622ff554d"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "Int16",
+            "example": 100
+          },
+          "calories": {
+            "type": "integer",
+            "format": "Int16",
+            "example": 1312
+          },
+          "title": {
+            "type": "string",
+            "example": "Горох маш Ярмарка Платинум"
+          }
+        }
+      },
+      "Anthropometry": {
+        "type": "object",
+        "properties": {
+          "height": {
+            "type": "integer",
+            "format": "int16",
+            "example": 175
+          },
+          "age": {
+            "type": "integer",
+            "format": "int16",
+            "example": 35
+          },
+          "currentWeight": {
+            "type": "integer",
+            "format": "int16",
+            "example": 70
+          },
+          "desiredWeight": {
+            "type": "integer",
+            "format": "int16",
+            "example": 60
+          },
+          "bloodType": {
+            "type": "integer",
+            "format": "int16",
+            "example": 2
+          }
+        }
+      },
+      "AnthropometryResp": {
+        "type": "object",
+        "properties": {
+          "calories": {
+            "type": "integer",
+            "format": "int16",
+            "example": 1357
+          },
+          "notRecomendedList": {
+            "$ref": "#/components/schemas/scema"
+          }
+        }
+      },
+      "scema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/stringInArray"
+        }
+      },
+      "AddMeal": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2022/10/15"
+          },
+          "product": {
+            "type": "string",
+            "example": "Локшина домашня"
+          },
+          "grams": {
+            "type": "integer",
+            "format": "int16",
+            "example": 200
+          }
+        }
+      },
+      "AddMealResp": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2022/10/15"
+          },
+          "product": {
+            "type": "string",
+            "example": "Локшина домашня"
+          },
+          "grams": {
+            "type": "integer",
+            "format": "int16",
+            "example": 200
+          },
+          "calories": {
+            "type": "integer",
+            "format": "int16",
+            "example": 644
+          },
+          "owner": {
+            "type": "string",
+            "example": "637cf389f73849dd8354ed5a"
+          },
+          "_id": {
+            "type": "string",
+            "example": "637f5c511fe8d81915ac2de0"
+          }
+        }
+      },
+      "DailyMeals": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "example": "2022/10/15"
+          }
+        }
+      }
+    }
+  }
+}
