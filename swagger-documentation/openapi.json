@@ -15,12 +15,16 @@
   },
   "servers": [
     {
-      "url": "https://slim-mom-backend-node.herokuapp.com",
+      "url": "https://slim-mom-frontend.vercel.app",
       "description": "Production server"
     },
     {
-      "url": "http://localhost:4000/",
-      "description": "localhost"
+      "url": "https://Slim-Mom-Frontend",
+      "description": "Beta server"
+    },
+    {
+      "url": "https://github.com/Specter-ode/Slim-Mom-Frontend",
+      "description": "github.com"
     }
   ],
   "tags": [
@@ -32,7 +36,9 @@
   "paths": {
     "/api/users/signup": {
       "post": {
-        "tags": ["AUTH ENDPOINTS. Register"],
+        "tags": [
+          "AUTH ENDPOINTS. Register"
+        ],
         "summary": "user registration",
         "description": "Create new user",
         "operationId": "CreateUser",
@@ -76,7 +82,9 @@
     },
     "/api/users/login": {
       "post": {
-        "tags": ["login"],
+        "tags": [
+          "login"
+        ],
         "summary": "user authentication into the system",
         "description": "Login User",
         "operationId": "LoginUser",
@@ -102,7 +110,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User successful authorized",
+            "description": "User successfull authorized",
             "content": {
               "application/json": {
                 "schema": {
@@ -122,9 +130,52 @@
         }
       }
     },
+    "/api/users/current": {
+      "get": {
+        "tags": [
+          "current User"
+        ],
+        "summary": "Get all your info",
+        "description": "Request information about the current user",
+        "operationId": "CurrentUser",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUser"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid signature"
+          }
+        }
+      }
+    },
     "/api/users/google": {
       "get": {
-        "tags": ["googleAuth"],
+        "tags": [
+          "Google Auth"
+        ],
         "summary": "user authentication into the system via google service",
         "description": "Login User",
         "operationId": "googleLogin",
@@ -137,7 +188,9 @@
     },
     "/api/users/facebook": {
       "get": {
-        "tags": ["facebookAuth"],
+        "tags": [
+          "Facebook Auth"
+        ],
         "summary": "user authentication into the system via facebook service",
         "description": "Login User",
         "operationId": "facebookUser",
@@ -150,7 +203,9 @@
     },
     "/api/users/logout": {
       "get": {
-        "tags": ["logout"],
+        "tags": [
+          "logout"
+        ],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -174,7 +229,9 @@
     },
     "/api/users/refresh": {
       "post": {
-        "tags": ["refresh"],
+        "tags": [
+          "refresh"
+        ],
         "summary": "Automatically update accessToken after it expires",
         "description": "Refresh Token",
         "operationId": "refreshToken",
@@ -213,7 +270,9 @@
     },
     "/api/products/": {
       "post": {
-        "tags": ["PRODUCT ENDPOINTS. Get products list"],
+        "tags": [
+          "PRODUCT ENDPOINTS. Get products list"
+        ],
         "summary": "Get an array of product names products List",
         "description": "",
         "operationId": "getProductsList",
@@ -258,7 +317,9 @@
     },
     "/api/products/:{product}": {
       "get": {
-        "tags": ["Get product info"],
+        "tags": [
+          "Get product info"
+        ],
         "summary": "Get information about one product",
         "description": "",
         "operationId": "getProductData",
@@ -312,7 +373,9 @@
     },
     "/api/products/diet": {
       "post": {
-        "tags": ["Get calories for Unregister user"],
+        "tags": [
+          "Get calories for Unregister user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
         "operationId": "getCaloriesAndListUnregisterUser",
@@ -361,7 +424,9 @@
     },
     "/api/products/persondaldiet": {
       "post": {
-        "tags": ["Get calories for Register user"],
+        "tags": [
+          "Get calories for Register user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
         "operationId": "getCaloriesAndList",
@@ -421,7 +486,9 @@
     },
     "/api/dailynutritions/addmeal": {
       "post": {
-        "tags": ["Add meal"],
+        "tags": [
+          "Add meal"
+        ],
         "summary": "Get info about product",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getCalories",
@@ -481,7 +548,9 @@
     },
     "/api/dailynutritions/getdailymeals": {
       "post": {
-        "tags": ["Get daily meals"],
+        "tags": [
+          "Get daily meals"
+        ],
         "summary": "Get info about product for a specific day",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getDailyMeals",
@@ -547,7 +616,9 @@
     },
     "/api/dailynutritions/removeMeal/:{mealId}": {
       "delete": {
-        "tags": ["Delete product by ID"],
+        "tags": [
+          "Delete product by ID"
+        ],
         "summary": "Delete purchase product by ID",
         "description": "",
         "operationId": "deleteProduct",
@@ -585,7 +656,11 @@
   "components": {
     "schemas": {
       "Register": {
-        "required": ["name", "email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -603,7 +678,10 @@
         }
       },
       "RegisterResp": {
-        "required": ["name", "email"],
+        "required": [
+          "name",
+          "email"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -632,7 +710,14 @@
             "example": "eyJhbGciOiJIUzI1NiIsInR5cC"
           },
           "dailyDiet": {
-            "type": "string"
+            "type": "object",
+            "properties": {
+              "calories": {
+                "type": "integer",
+                "format": "Int16",
+                "example": 1312
+              }
+            }
           },
           "refreshToken": {
             "type": "string",
@@ -653,8 +738,45 @@
           }
         }
       },
+      "CurrentUser": {
+        "required": [
+          "dailyDiet",
+          "user",
+          "email",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "dailyDiet": {
+            "type": "object",
+            "properties": {
+              "calories": {
+                "type": "integer",
+                "format": "Int16",
+                "example": 1312
+              }
+            }
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "example": "user@example.com"
+              },
+              "password": {
+                "type": "string",
+                "example": "exampleName"
+              }
+            }
+          }
+        }
+      },
       "Refresh": {
-        "required": ["accessToken", "refreshToken"],
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "accessToken": {
