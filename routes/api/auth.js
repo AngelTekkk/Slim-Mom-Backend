@@ -23,6 +23,8 @@ router.post(
 
 router.post("/login", validateBody(loginSchema), ctrlWrapper(ctrl.login));
 
+router.get("/current", ctrlWrapper(ctrl.getCurrentUser));
+
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
 
 router.post("/refresh", validateBody(refreshSchema), ctrlWrapper(ctrl.refresh));
