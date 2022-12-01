@@ -11,7 +11,8 @@ const { REFRESH_TOKEN_SECRET_KEY } = process.env;
 const refresh = async (req, res) => {
   try {
     const { refreshToken: token } = req.body;
-    const { id } = jwt.verify(token, REFRESH_TOKEN_SECRET_KEY);
+
+    const { id } = jwt.verify(JSON.parse(token), REFRESH_TOKEN_SECRET_KEY);
     const user = await User.findById(id);
     if (!user || !user.refreshToken) {
       throw RequestError(401);
@@ -24,6 +25,7 @@ const refresh = async (req, res) => {
       refreshToken,
     });
   } catch (error) {
+    console.log(error);
     if (!error.status) {
       error.status = 401;
     }
