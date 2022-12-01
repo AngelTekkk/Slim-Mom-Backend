@@ -14,6 +14,8 @@ const findOneProduct = require("./products/findOneProduct");
 const dailyIntakeController = require("./products/dailyIntakeController");
 const dailyIntakeControllerForUser = require("./products/dailyIntakeControllerForUser");
 
+const getDevelopers = require("./developers/getDevelopers");
+
 module.exports = {
   register,
   login,
@@ -28,4 +30,5 @@ module.exports = {
   getDailyMeals,
   dailyIntakeController,
   dailyIntakeControllerForUser,
+  getDevelopers,
 };

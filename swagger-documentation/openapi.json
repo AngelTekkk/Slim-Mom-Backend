@@ -7,7 +7,7 @@
     "contact": {
       "email": "mlightpro@gmail.com"
     },
-    "version": "1.0.7"
+    "version": "1.0.8"
   },
   "externalDocs": {
     "description": "Slim-Mom - Website",
@@ -36,7 +36,9 @@
   "paths": {
     "/api/users/signup": {
       "post": {
-        "tags": ["AUTH ENDPOINTS. Register"],
+        "tags": [
+          "AUTH ENDPOINTS. Register"
+        ],
         "summary": "user registration",
         "description": "Create new user",
         "operationId": "CreateUser",
@@ -80,7 +82,9 @@
     },
     "/api/users/login": {
       "post": {
-        "tags": ["login"],
+        "tags": [
+          "login"
+        ],
         "summary": "user authentication into the system",
         "description": "Login User",
         "operationId": "LoginUser",
@@ -128,7 +132,9 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": ["current User"],
+        "tags": [
+          "current User"
+        ],
         "summary": "Get all your info",
         "description": "Request information about the current user",
         "operationId": "CurrentUser",
@@ -167,7 +173,9 @@
     },
     "/api/users/google": {
       "get": {
-        "tags": ["Google Auth"],
+        "tags": [
+          "Google Auth"
+        ],
         "summary": "user authentication into the system via google service",
         "description": "Login User",
         "operationId": "googleLogin",
@@ -180,7 +188,9 @@
     },
     "/api/users/facebook": {
       "get": {
-        "tags": ["Facebook Auth"],
+        "tags": [
+          "Facebook Auth"
+        ],
         "summary": "user authentication into the system via facebook service",
         "description": "Login User",
         "operationId": "facebookUser",
@@ -193,7 +203,9 @@
     },
     "/api/users/logout": {
       "get": {
-        "tags": ["logout"],
+        "tags": [
+          "logout"
+        ],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -217,21 +229,33 @@
     },
     "/api/users/refresh": {
       "post": {
-        "tags": ["refresh"],
+        "tags": [
+          "refresh"
+        ],
         "summary": "Automatically update accessToken after it expires",
         "description": "Refresh Token",
         "operationId": "refreshToken",
-        "parameters": [
-          {
-            "name": "Refresh Token",
-            "in": "query",
-            "description": "Refresh Token",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "description": "Refresh Token",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshToken"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "",
@@ -254,71 +278,19 @@
         }
       }
     },
-    "/api/products/": {
-      "post": {
-        "tags": ["PRODUCT ENDPOINTS. Get products list"],
-        "summary": "Get an array of product names products List",
-        "description": "",
-        "operationId": "getProductsList",
-        "parameters": [
-          {
-            "name": "Bearer Token",
-            "in": "query",
-            "description": "Add Bearer Token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/stringInArray"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/stringInArray"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Product not found"
-          }
-        }
-      }
-    },
     "/api/products/:{product}": {
       "get": {
-        "tags": ["Get product info"],
+        "tags": [
+          "Get product info"
+        ],
         "summary": "Get information about one product",
         "description": "",
         "operationId": "getProductData",
         "parameters": [
           {
-            "name": "Bearer Token",
-            "in": "query",
-            "description": "Add Bearer Token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "product",
             "in": "path",
-            "description": "Add name of product",
+            "description": "Name or some letters of the product (in ukrainian) what you want to find",
             "required": true,
             "schema": {
               "type": "string"
@@ -353,9 +325,11 @@
         }
       }
     },
-    "/api/products/diet": {
+    "/api/daily-intake": {
       "post": {
-        "tags": ["Get calories for Unregister user"],
+        "tags": [
+          "Daily diet for unregistered user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
         "operationId": "getCaloriesAndListUnregisterUser",
@@ -402,9 +376,11 @@
         }
       }
     },
-    "/api/products/persondaldiet": {
+    "/api/daily-intake/user": {
       "post": {
-        "tags": ["Get calories for Register user"],
+        "tags": [
+          "DailyDiet for registered user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
         "operationId": "getCaloriesAndList",
@@ -464,7 +440,9 @@
     },
     "/api/dailynutritions/addmeal": {
       "post": {
-        "tags": ["Add meal"],
+        "tags": [
+          "Add meal"
+        ],
         "summary": "Get info about product",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getCalories",
@@ -524,7 +502,9 @@
     },
     "/api/dailynutritions/getdailymeals": {
       "post": {
-        "tags": ["Get daily meals"],
+        "tags": [
+          "Get meals for current day"
+        ],
         "summary": "Get info about product for a specific day",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getDailyMeals",
@@ -590,7 +570,9 @@
     },
     "/api/dailynutritions/removeMeal/:{mealId}": {
       "delete": {
-        "tags": ["Delete product by ID"],
+        "tags": [
+          "Delete product by ID"
+        ],
         "summary": "Delete purchase product by ID",
         "description": "",
         "operationId": "deleteProduct",
@@ -628,7 +610,11 @@
   "components": {
     "schemas": {
       "Register": {
-        "required": ["name", "email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -646,7 +632,10 @@
         }
       },
       "RegisterResp": {
-        "required": ["name", "email"],
+        "required": [
+          "name",
+          "email"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -680,7 +669,10 @@
               "calories": {
                 "type": "integer",
                 "format": "Int16",
-                "example": 1312
+                "example": 1357.75
+              },
+              "notAllowedProduct": {
+                "$ref": "#/components/schemas/scema"
               }
             }
           },
@@ -704,7 +696,12 @@
         }
       },
       "CurrentUser": {
-        "required": ["dailyDiet", "user", "email", "name"],
+        "required": [
+          "dailyDiet",
+          "user",
+          "email",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "dailyDiet": {
@@ -713,7 +710,10 @@
               "calories": {
                 "type": "integer",
                 "format": "Int16",
-                "example": 1312
+                "example": 1357.75
+              },
+              "notAllowedProduct": {
+                "$ref": "#/components/schemas/scema"
               }
             }
           },
@@ -733,7 +733,10 @@
         }
       },
       "Refresh": {
-        "required": ["accessToken", "refreshToken"],
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "accessToken": {
@@ -746,8 +749,21 @@
           }
         }
       },
-      "stringInArray": {
-        "type": "string"
+      "RefreshToken": {
+        "required": [
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzODU4MTUwYzE3YjAwNzdiMGYzNTYwZSIsImlhdCI6MTY2OTg0Nzc4MSwiZXhwIjoxNjcwNDUyNTgxfQ.hrIeddE7J43nyleWTHUv7CmPCz6y_iG6NVa0K-e2iBE"
+          }
+        }
+      },
+      "ElementsInArray": {
+        "type": "string",
+        "example": "Млинці з грибами, Локшина домашня, …"
       },
       "Product": {
         "type": "object",
@@ -808,9 +824,9 @@
           "calories": {
             "type": "integer",
             "format": "int16",
-            "example": 1357
+            "example": 1357.75
           },
-          "notRecomendedList": {
+          "notAllowedProduct": {
             "$ref": "#/components/schemas/scema"
           }
         }
@@ -818,7 +834,7 @@
       "scema": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/stringInArray"
+          "$ref": "#/components/schemas/ElementsInArray"
         }
       },
       "AddMeal": {
@@ -835,7 +851,7 @@
           "grams": {
             "type": "integer",
             "format": "int16",
-            "example": 200
+            "example": 100
           }
         }
       },
@@ -844,7 +860,7 @@
         "properties": {
           "date": {
             "type": "string",
-            "example": "2022/10/15"
+            "example": "2022/12/01"
           },
           "product": {
             "type": "string",
@@ -853,16 +869,12 @@
           "grams": {
             "type": "integer",
             "format": "int16",
-            "example": 200
+            "example": 100
           },
           "calories": {
             "type": "integer",
             "format": "int16",
-            "example": 644
-          },
-          "owner": {
-            "type": "string",
-            "example": "637cf389f73849dd8354ed5a"
+            "example": 346
           },
           "_id": {
             "type": "string",

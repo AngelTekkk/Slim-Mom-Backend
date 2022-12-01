@@ -7,6 +7,7 @@ const authRouter = require("./routes/api/auth");
 const productsRouter = require("./routes/api/products");
 const dailyNutritionsRouter = require("./routes/api/dailyNutritions");
 const dailyIntakeRouter = require("./routes/api/dailyIntakeRoutes");
+const developersRouter = require("./routes/api/developers");
 
 const app = express();
 
@@ -22,7 +23,9 @@ app.use("/api/users", authRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/dailynutritions", dailyNutritionsRouter);
 app.use("/api/daily-intake", dailyIntakeRouter);
+app.use("/api/developers", developersRouter);
 app.use("/api/swagger", express.static("swagger-documentation"));
+app.use("/public", express.static("public"));
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
