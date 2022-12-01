@@ -5,7 +5,10 @@ const registerSchema = Joi.object({
     .pattern(/^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/)
     .min(2)
     .max(40)
-    .required(),
+    .required()
+    .messages({
+      "string.pattern.base": "Please, use only lettes in this field",
+    }),
   email: Joi.string()
     .email({
       minDomainSegments: 2,

@@ -16,6 +16,7 @@ const getCurrentUser = async (req, res) => {
     throw RequestError(401);
   }
   const { id } = jwt.verify(token, ACCESS_TOKEN_SECRET_KEY);
+
   const user = await User.findById(id);
   if (!user) {
     throw RequestError(401, "Invalid signature");
