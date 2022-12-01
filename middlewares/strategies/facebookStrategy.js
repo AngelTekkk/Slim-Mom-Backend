@@ -20,14 +20,12 @@ const facebookParams = {
 };
 
 const facebookCallback = async (accessToken, refreshToken, profile, done) => {
-  console.log("profile: ", profile);
   try {
     const { emails, displayName } = profile;
     const email = emails[0].value;
     // const photo = photos[0].value;
     // const avatarURL = photo || gravatar.url(email);
     const user = await User.findOne({ email });
-    console.log("facebook user: ", user);
     if (user) {
       return done(null, user);
     }

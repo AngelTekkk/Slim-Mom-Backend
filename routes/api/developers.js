@@ -8,6 +8,6 @@ const ctrl = require("../../controllers");
 
 const router = express.Router();
 
-router.get("/:product", authenticate, ctrlWrapper(ctrl.findOneProduct));
+router.get("/", authenticate, ctrlWrapper(ctrl.getDevelopers));
 
 module.exports = router;

@@ -7,7 +7,8 @@ const findOneProduct = async (req, res) => {
     { "title.ua": { $regex: product, $options: "i" } },
     { title: "$title.ua", weight: 1, calories: 1 }
   );
-  if (!result) {
+
+  if (result.length < 1) {
     throw RequestError(404, "Not found");
   }
   res.json(result);

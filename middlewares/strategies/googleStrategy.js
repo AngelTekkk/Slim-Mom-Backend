@@ -20,11 +20,8 @@ const googleCallback = async (
   done
 ) => {
   try {
-    console.log(req.headers);
-    console.log("google profile: ", profile);
     const { email, displayName } = profile;
     const user = await User.findOne({ email });
-    console.log("google user: ", user);
     if (user) {
       return done(null, user);
     }
