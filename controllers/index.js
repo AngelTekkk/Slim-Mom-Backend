@@ -18,6 +18,8 @@ const getDailyMeals = require("./dailyNutritions/getDailyMeals");
 const dailyIntakeController = require("./dailyIntake/dailyIntakeController");
 const dailyIntakeControllerForUser = require("./dailyIntake/dailyIntakeControllerForUser");
 
+const getDevelopers = require("./developers/getDevelopers");
+
 module.exports = {
   register,
   login,
@@ -35,4 +37,5 @@ module.exports = {
   getDailyMeals,
   dailyIntakeController,
   dailyIntakeControllerForUser,
+  getDevelopers,
 };
