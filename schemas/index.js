@@ -5,10 +5,7 @@ const {
   // resendEmailSchema
 } = require("./user");
 
-const { personalDataSchema } = require("./products");
-
 const { mealSchema, dailyMealsSchema } = require("./dailyNutrition");
-
 const { dailyIntakeJoiSchema } = require("./dailyIntakeJoiSchema");
 
 module.exports = {
@@ -16,7 +13,6 @@ module.exports = {
   loginSchema,
   refreshSchema,
   // resendEmailSchema,
-  personalDataSchema,
   mealSchema,
   dailyMealsSchema,
   dailyIntakeJoiSchema,
