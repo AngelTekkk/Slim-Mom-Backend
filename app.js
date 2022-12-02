@@ -10,7 +10,6 @@ const dailyIntakeRouter = require("./routes/api/dailyIntakeRoutes");
 const developersRouter = require("./routes/api/developers");
 
 const app = express();
-
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));

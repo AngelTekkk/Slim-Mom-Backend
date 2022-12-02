@@ -1,13 +1,7 @@
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 const { User } = require("../../models");
-
 const { RequestError } = require("../../helpers");
-
 const { ACCESS_TOKEN_SECRET_KEY } = process.env;
-
-// const { SECRET_KEY } = process.env;
 
 const getCurrentUser = async (req, res) => {
   const { authorization = "" } = req.headers;

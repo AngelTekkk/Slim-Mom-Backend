@@ -21,16 +21,15 @@ const dailyIntakeController = async (req, res, next) => {
     }
   );
 
+    if (!result) {
+      throw RequestError(404, "Not found");
+    }
   const dailyIntake = {
     calories: dailyCaloriesCalculate.toFixed(),
     notAllowedProduct: result.map(
       ({ title = "Sorry we don`t find title" }) => title
     ),
   };
-
-  if (!result) {
-    throw RequestError(404, "Not found");
-  }
 
   res.json(dailyIntake);
 };
