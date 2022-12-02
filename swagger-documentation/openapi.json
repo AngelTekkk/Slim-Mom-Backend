@@ -11,11 +11,11 @@
   },
   "externalDocs": {
     "description": "Slim-Mom - Website",
-    "url": "https://Slim-Mom-Frontend"
+    "url": "slim-mom-frontend.vercel.app/"
   },
   "servers": [
     {
-      "url": "https://slim-mom-frontend.vercel.app",
+      "url": "https://slim-mom-backend-node.herokuapp.com",
       "description": "Production server"
     },
     {
@@ -36,9 +36,7 @@
   "paths": {
     "/api/users/signup": {
       "post": {
-        "tags": [
-          "AUTH ENDPOINTS. Register"
-        ],
+        "tags": ["AUTH ENDPOINTS. Register"],
         "summary": "user registration",
         "description": "Create new user",
         "operationId": "CreateUser",
@@ -82,9 +80,7 @@
     },
     "/api/users/login": {
       "post": {
-        "tags": [
-          "login"
-        ],
+        "tags": ["login"],
         "summary": "user authentication into the system",
         "description": "Login User",
         "operationId": "LoginUser",
@@ -132,9 +128,7 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": [
-          "current User"
-        ],
+        "tags": ["current User"],
         "summary": "Get all your info",
         "description": "Request information about the current user",
         "operationId": "CurrentUser",
@@ -173,9 +167,7 @@
     },
     "/api/users/google": {
       "get": {
-        "tags": [
-          "Google Auth"
-        ],
+        "tags": ["Google Auth"],
         "summary": "user authentication into the system via google service",
         "description": "Login User",
         "operationId": "googleLogin",
@@ -188,9 +180,7 @@
     },
     "/api/users/facebook": {
       "get": {
-        "tags": [
-          "Facebook Auth"
-        ],
+        "tags": ["Facebook Auth"],
         "summary": "user authentication into the system via facebook service",
         "description": "Login User",
         "operationId": "facebookUser",
@@ -203,9 +193,7 @@
     },
     "/api/users/logout": {
       "get": {
-        "tags": [
-          "logout"
-        ],
+        "tags": ["logout"],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -229,9 +217,7 @@
     },
     "/api/users/refresh": {
       "post": {
-        "tags": [
-          "refresh"
-        ],
+        "tags": ["refresh"],
         "summary": "Automatically update accessToken after it expires",
         "description": "Refresh Token",
         "operationId": "refreshToken",
@@ -280,9 +266,7 @@
     },
     "/api/products/:{product}": {
       "get": {
-        "tags": [
-          "Get product info"
-        ],
+        "tags": ["Get product info"],
         "summary": "Get information about one product",
         "description": "",
         "operationId": "getProductData",
@@ -327,9 +311,7 @@
     },
     "/api/daily-intake": {
       "post": {
-        "tags": [
-          "Daily diet for unregistered user"
-        ],
+        "tags": ["Daily diet for unregistered user"],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
         "operationId": "getCaloriesAndListUnregisterUser",
@@ -378,9 +360,7 @@
     },
     "/api/daily-intake/user": {
       "post": {
-        "tags": [
-          "DailyDiet for registered user"
-        ],
+        "tags": ["DailyDiet for registered user"],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
         "operationId": "getCaloriesAndList",
@@ -440,9 +420,7 @@
     },
     "/api/dailynutritions/addmeal": {
       "post": {
-        "tags": [
-          "Add meal"
-        ],
+        "tags": ["Add meal"],
         "summary": "Get info about product",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getCalories",
@@ -502,9 +480,7 @@
     },
     "/api/dailynutritions/getdailymeals": {
       "post": {
-        "tags": [
-          "Get meals for current day"
-        ],
+        "tags": ["Get meals for current day"],
         "summary": "Get info about product for a specific day",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getDailyMeals",
@@ -570,9 +546,7 @@
     },
     "/api/dailynutritions/removeMeal/:{mealId}": {
       "delete": {
-        "tags": [
-          "Delete product by ID"
-        ],
+        "tags": ["Delete product by ID"],
         "summary": "Delete purchase product by ID",
         "description": "",
         "operationId": "deleteProduct",
@@ -610,11 +584,7 @@
   "components": {
     "schemas": {
       "Register": {
-        "required": [
-          "name",
-          "email",
-          "password"
-        ],
+        "required": ["name", "email", "password"],
         "type": "object",
         "properties": {
           "name": {
@@ -632,10 +602,7 @@
         }
       },
       "RegisterResp": {
-        "required": [
-          "name",
-          "email"
-        ],
+        "required": ["name", "email"],
         "type": "object",
         "properties": {
           "name": {
@@ -696,12 +663,7 @@
         }
       },
       "CurrentUser": {
-        "required": [
-          "dailyDiet",
-          "user",
-          "email",
-          "name"
-        ],
+        "required": ["dailyDiet", "user", "email", "name"],
         "type": "object",
         "properties": {
           "dailyDiet": {
@@ -733,10 +695,7 @@
         }
       },
       "Refresh": {
-        "required": [
-          "accessToken",
-          "refreshToken"
-        ],
+        "required": ["accessToken", "refreshToken"],
         "type": "object",
         "properties": {
           "accessToken": {
@@ -750,9 +709,7 @@
         }
       },
       "RefreshToken": {
-        "required": [
-          "refreshToken"
-        ],
+        "required": ["refreshToken"],
         "type": "object",
         "properties": {
           "refreshToken": {
