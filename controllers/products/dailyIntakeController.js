@@ -1,5 +1,4 @@
 const { Product } = require("../../models");
-
 const { RequestError } = require("../../helpers");
 
 const dailyIntakeController = async (req, res, next) => {
@@ -21,9 +20,9 @@ const dailyIntakeController = async (req, res, next) => {
     }
   );
 
-    if (!result) {
-      throw RequestError(404, "Not found");
-    }
+  if (!result) {
+    throw RequestError(404, "Not found");
+  }
   const dailyIntake = {
     calories: dailyCaloriesCalculate.toFixed(),
     notAllowedProduct: result.map(

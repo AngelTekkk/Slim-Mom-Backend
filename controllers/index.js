@@ -5,6 +5,9 @@ const refresh = require("./auth/refresh");
 const googleAuth = require("./auth/googleAuth");
 const facebookAuth = require("./auth/facebookAuth");
 const getCurrentUser = require("./auth/getCurrentUser");
+const sendKey = require("./auth/sendKey");
+const verifyKey = require("./auth/verifyKey");
+const saveNewPassword = require("./auth/saveNewPassword");
 
 const addMeal = require("./dailyNutritions/addMeal");
 const removeMeal = require("./dailyNutritions/removeMeal");
@@ -31,4 +34,7 @@ module.exports = {
   dailyIntakeController,
   dailyIntakeControllerForUser,
   getDevelopers,
+  sendKey,
+  verifyKey,
+  saveNewPassword,
 };
