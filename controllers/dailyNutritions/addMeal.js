@@ -8,7 +8,7 @@ const addMeal = async (req, res) => {
   if (!calories) {
     throw RequestError(404, "This product does not exist in the database");
   }
-  const cal = (grams * calories) / 100;
+  const cal = ((grams * calories) / 100).toFixed();
   const result = await DailyNutrition.create({
     ...req.body,
     calories: cal,

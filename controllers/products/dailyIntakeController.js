@@ -17,17 +17,24 @@ const dailyIntakeController = async (req, res, next) => {
     },
     {
       title: `$title.ua`,
+      categories: `$categories`,
     }
   );
 
   if (!result) {
     throw RequestError(404, "Not found");
   }
+
+  const productCategories = result
+    .flatMap((product) => product.categories)
+    .filter((item, index, array) => array.indexOf(item) === index);
+
   const dailyIntake = {
     calories: dailyCaloriesCalculate.toFixed(),
     notAllowedProduct: result.map(
       ({ title = "Sorry we don`t find title" }) => title
     ),
+    categories: productCategories,
   };
 
   res.json(dailyIntake);

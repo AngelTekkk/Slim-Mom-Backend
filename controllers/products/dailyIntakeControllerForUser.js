@@ -19,6 +19,7 @@ const dailyIntakeControllerForUser = async (req, res, next) => {
     },
     {
       title: `$title.ua`,
+      categories: `$categories`,
     }
   );
 
@@ -26,11 +27,16 @@ const dailyIntakeControllerForUser = async (req, res, next) => {
     throw RequestError(404, "Not found");
   }
 
+  const productCategories = result
+    .flatMap((product) => product.categories)
+    .filter((item, index, array) => array.indexOf(item) === index);
+
   const dailyIntake = {
     calories: dailyCaloriesCalculate.toFixed(),
     notAllowedProduct: result.map(
       ({ title = "Sorry we don`t find title" }) => title
     ),
+    categories: productCategories,
   };
 
   await User.findByIdAndUpdate(id, {
