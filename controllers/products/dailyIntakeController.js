@@ -1,5 +1,4 @@
 const { Product } = require("../../models");
-
 const { RequestError } = require("../../helpers");
 
 const dailyIntakeController = async (req, res, next) => {

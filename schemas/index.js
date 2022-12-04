@@ -2,6 +2,7 @@ const {
   registerSchema,
   loginSchema,
   refreshSchema,
+  passwordSchema,
   // resendEmailSchema
 } = require("./user");
 
@@ -13,6 +14,7 @@ module.exports = {
   registerSchema,
   loginSchema,
   refreshSchema,
+  passwordSchema,
   // resendEmailSchema,
   mealSchema,
   dailyMealsSchema,
