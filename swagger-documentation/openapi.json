@@ -7,24 +7,16 @@
     "contact": {
       "email": "mlightpro@gmail.com"
     },
-    "version": "1.0.8"
-  },
-  "externalDocs": {
-    "description": "Slim-Mom - Website",
-    "url": "slim-mom-frontend.vercel.app/"
+    "version": "1.1.0"
   },
   "servers": [
     {
-      "url": "https://slim-mom-backend-node.herokuapp.com",
+      "url": "https://slim-mom.onrender.com",
       "description": "Production server"
     },
     {
-      "url": "https://Slim-Mom-Frontend",
-      "description": "Beta server"
-    },
-    {
-      "url": "https://github.com/Specter-ode/Slim-Mom-Frontend",
-      "description": "github.com"
+      "url": "http://localhost:3000",
+      "description": "test server"
     }
   ],
   "tags": [
@@ -36,7 +28,9 @@
   "paths": {
     "/api/users/signup": {
       "post": {
-        "tags": ["AUTH ENDPOINTS. Register"],
+        "tags": [
+          "AUTH ENDPOINTS. Register"
+        ],
         "summary": "user registration",
         "description": "Create new user",
         "operationId": "CreateUser",
@@ -80,7 +74,9 @@
     },
     "/api/users/login": {
       "post": {
-        "tags": ["login"],
+        "tags": [
+          "login"
+        ],
         "summary": "user authentication into the system",
         "description": "Login User",
         "operationId": "LoginUser",
@@ -128,7 +124,9 @@
     },
     "/api/users/current": {
       "get": {
-        "tags": ["current User"],
+        "tags": [
+          "current User"
+        ],
         "summary": "Get all your info",
         "description": "Request information about the current user",
         "operationId": "CurrentUser",
@@ -167,7 +165,9 @@
     },
     "/api/users/google": {
       "get": {
-        "tags": ["Google Auth"],
+        "tags": [
+          "Google Auth"
+        ],
         "summary": "user authentication into the system via google service",
         "description": "Login User",
         "operationId": "googleLogin",
@@ -180,7 +180,9 @@
     },
     "/api/users/facebook": {
       "get": {
-        "tags": ["Facebook Auth"],
+        "tags": [
+          "Facebook Auth"
+        ],
         "summary": "user authentication into the system via facebook service",
         "description": "Login User",
         "operationId": "facebookUser",
@@ -193,7 +195,9 @@
     },
     "/api/users/logout": {
       "get": {
-        "tags": ["logout"],
+        "tags": [
+          "logout"
+        ],
         "summary": "Logs out current logged in user session",
         "description": "",
         "operationId": "logoutUser",
@@ -217,7 +221,9 @@
     },
     "/api/users/refresh": {
       "post": {
-        "tags": ["refresh"],
+        "tags": [
+          "refresh"
+        ],
         "summary": "Automatically update accessToken after it expires",
         "description": "Refresh Token",
         "operationId": "refreshToken",
@@ -264,9 +270,123 @@
         }
       }
     },
+    "/api/users/password": {
+      "patch": {
+        "tags": [
+          "Save new password"
+        ],
+        "summary": "Save new password",
+        "description": "For saving the new password u need to send new password and email",
+        "operationId": "saveNewPassword",
+        "requestBody": {
+          "description": "Here you need to enter new password and email",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveNewPassword"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveNewPassword"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveNewPassword"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "New password saved"
+          },
+          "404": {
+            "description": "Not found user"
+          }
+        }
+      }
+    },
+    "/api/users/key/:{email}": {
+      "get": {
+        "tags": [
+          "Send secret key to email"
+        ],
+        "summary": "Send secret key to email",
+        "description": "Send key",
+        "operationId": "sendKey",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "write your email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api/users/verify/:{key}": {
+      "get": {
+        "tags": [
+          "Check the secret key"
+        ],
+        "summary": "Check the secret key from your email",
+        "description": "Check key",
+        "operationId": "checkKey",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "description": "write your secret key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyResp"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyResp"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Wrong key"
+          }
+        }
+      }
+    },
     "/api/products/:{product}": {
       "get": {
-        "tags": ["Get product info"],
+        "tags": [
+          "Get product info"
+        ],
         "summary": "Get information about one product",
         "description": "",
         "operationId": "getProductData",
@@ -311,7 +431,9 @@
     },
     "/api/daily-intake": {
       "post": {
-        "tags": ["Daily diet for unregistered user"],
+        "tags": [
+          "Daily diet for unregistered user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Unregistered user",
         "operationId": "getCaloriesAndListUnregisterUser",
@@ -360,7 +482,9 @@
     },
     "/api/daily-intake/user": {
       "post": {
-        "tags": ["DailyDiet for registered user"],
+        "tags": [
+          "DailyDiet for registered user"
+        ],
         "summary": "Send anthropometry to get daily calorie",
         "description": "Get daily calorie intake and a list of non-recommended foods for an Registered user",
         "operationId": "getCaloriesAndList",
@@ -420,7 +544,9 @@
     },
     "/api/dailynutritions/addmeal": {
       "post": {
-        "tags": ["Add meal"],
+        "tags": [
+          "Add meal"
+        ],
         "summary": "Get info about product",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getCalories",
@@ -480,7 +606,9 @@
     },
     "/api/dailynutritions/getdailymeals": {
       "post": {
-        "tags": ["Get meals for current day"],
+        "tags": [
+          "Get meals for current day"
+        ],
         "summary": "Get info about product for a specific day",
         "description": "You send information about the date, product, grams and get info about product in diery",
         "operationId": "getDailyMeals",
@@ -546,7 +674,9 @@
     },
     "/api/dailynutritions/removeMeal/:{mealId}": {
       "delete": {
-        "tags": ["Delete product by ID"],
+        "tags": [
+          "Delete product by ID"
+        ],
         "summary": "Delete purchase product by ID",
         "description": "",
         "operationId": "deleteProduct",
@@ -579,12 +709,63 @@
           }
         }
       }
+    },
+    "/api/developers": {
+      "get": {
+        "tags": [
+          "Get developers info"
+        ],
+        "summary": "Get information about all developers",
+        "description": "",
+        "operationId": "getDevelopersData",
+        "parameters": [
+          {
+            "name": "Bearer Token",
+            "in": "query",
+            "description": "Add Bearer Token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Developers"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Developers"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "Register": {
-        "required": ["name", "email", "password"],
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -602,7 +783,10 @@
         }
       },
       "RegisterResp": {
-        "required": ["name", "email"],
+        "required": [
+          "name",
+          "email"
+        ],
         "type": "object",
         "properties": {
           "name": {
@@ -663,7 +847,12 @@
         }
       },
       "CurrentUser": {
-        "required": ["dailyDiet", "user", "email", "name"],
+        "required": [
+          "dailyDiet",
+          "user",
+          "email",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "dailyDiet": {
@@ -695,7 +884,10 @@
         }
       },
       "Refresh": {
-        "required": ["accessToken", "refreshToken"],
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "accessToken": {
@@ -709,7 +901,9 @@
         }
       },
       "RefreshToken": {
-        "required": ["refreshToken"],
+        "required": [
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "refreshToken": {
@@ -845,6 +1039,61 @@
           "date": {
             "type": "string",
             "example": "2022/10/15"
+          }
+        }
+      },
+      "Developers": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "example": "6388c8edc0125813f21a33a4"
+          },
+          "name": {
+            "type": "string",
+            "example": "Maksym Pokulytyi"
+          },
+          "position": {
+            "type": "string",
+            "example": "developer and Scrum Master"
+          },
+          "avatarUrl": {
+            "type": "string",
+            "example": "https://slim-mom.onrender.com/public/Maksym.jpg"
+          }
+        }
+      },
+      "VerifyResp": {
+        "required": [
+          "email",
+          "verifiedKey"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "refreshToken": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "SaveNewPassword": {
+        "required": [
+          "email",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "user@example.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "qwerty123"
           }
         }
       }
