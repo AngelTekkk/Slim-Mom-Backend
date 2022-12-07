@@ -23,8 +23,6 @@ const facebookCallback = async (accessToken, refreshToken, profile, done) => {
   try {
     const { emails, displayName } = profile;
     const email = emails[0].value;
-    // const photo = photos[0].value;
-    // const avatarURL = photo || gravatar.url(email);
     const user = await User.findOne({ email });
     if (user) {
       return done(null, user);
@@ -35,7 +33,8 @@ const facebookCallback = async (accessToken, refreshToken, profile, done) => {
       name: displayName,
       email,
       password: hashPassword,
-      //   avatarURL,
+      verify: true,
+      verificationToken: "Facebook",
     });
     done(null, newUser);
   } catch (error) {

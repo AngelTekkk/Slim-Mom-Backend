@@ -32,6 +32,8 @@ const googleCallback = async (
       name: displayName.trim(),
       email,
       password: hashPassword,
+      verify: true,
+      verificationToken: "Google",
     });
     done(null, newUser);
   } catch (err) {

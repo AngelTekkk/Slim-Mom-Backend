@@ -8,6 +8,8 @@ const getCurrentUser = require("./auth/getCurrentUser");
 const sendKey = require("./auth/sendKey");
 const verifyKey = require("./auth/verifyKey");
 const saveNewPassword = require("./auth/saveNewPassword");
+const resendEmail = require("./auth/resendEmail");
+const verify = require("./auth/verify");
 
 const addMeal = require("./dailyNutritions/addMeal");
 const removeMeal = require("./dailyNutritions/removeMeal");
@@ -37,4 +39,6 @@ module.exports = {
   sendKey,
   verifyKey,
   saveNewPassword,
+  resendEmail,
+  verify,
 };

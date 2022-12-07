@@ -8,6 +8,7 @@ const {
   loginSchema,
   refreshSchema,
   passwordSchema,
+  resendEmailSchema,
 } = require("../../schemas");
 
 const ctrl = require("../../controllers");
@@ -18,6 +19,14 @@ router.post(
   "/signup",
   validateBody(registerSchema),
   ctrlWrapper(ctrl.register)
+);
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+
+router.post(
+  "/verify",
+  validateBody(resendEmailSchema),
+  ctrlWrapper(ctrl.resendEmail)
 );
 
 router.post("/login", validateBody(loginSchema), ctrlWrapper(ctrl.login));

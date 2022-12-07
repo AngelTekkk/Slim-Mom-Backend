@@ -3,9 +3,8 @@ const {
   loginSchema,
   refreshSchema,
   passwordSchema,
-  // resendEmailSchema
+  resendEmailSchema,
 } = require("./user");
-
 
 const { mealSchema, dailyMealsSchema } = require("./dailyNutrition");
 const { dailyIntakeJoiSchema } = require("./dailyIntakeJoiSchema");
@@ -15,7 +14,7 @@ module.exports = {
   loginSchema,
   refreshSchema,
   passwordSchema,
-  // resendEmailSchema,
+  resendEmailSchema,
   mealSchema,
   dailyMealsSchema,
   dailyIntakeJoiSchema,
