@@ -21,10 +21,10 @@ router.post(
   ctrlWrapper(ctrl.register)
 );
 
-router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verify));
+router.get("/verificate/:verificationToken", ctrlWrapper(ctrl.verify));
 
 router.post(
-  "/verify",
+  "/verificate",
   validateBody(resendEmailSchema),
   ctrlWrapper(ctrl.resendEmail)
 );

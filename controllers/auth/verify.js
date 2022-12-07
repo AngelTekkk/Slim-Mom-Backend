@@ -17,9 +17,6 @@ const verify = async (req, res) => {
 
   const { accessToken, refreshToken } = await createTokens(user._id);
 
-  // res.json({
-  //   message: "Verification successful",
-  // });
   res.redirect(
     `${SOCIAL_REDIRECT_URL}?accessToken=${accessToken}&refreshToken=${refreshToken}`
   );

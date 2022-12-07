@@ -17,7 +17,7 @@ const resendEmail = async (req, res) => {
   const mail = {
     to: email,
     subject: "Slim-Mom verification email",
-    html: `<a target="_blank" href="${APP_URL}/api/users/verify/${user.verificationToken}">Click to verify email</a>`,
+    html: `<a target="_blank" href="${APP_URL}/api/users/verificate/${user.verificationToken}">Click to verify email</a>`,
   };
 
   await sendEmail(mail);
