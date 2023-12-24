@@ -9,7 +9,7 @@ const sendKey = require("./auth/sendKey");
 const verifyKey = require("./auth/verifyKey");
 const saveNewPassword = require("./auth/saveNewPassword");
 const resendEmail = require("./auth/resendEmail");
-const verify = require("./auth/verify");
+const verificateEmail = require("./auth/verificateEmail");
 
 const addMeal = require("./dailyNutritions/addMeal");
 const removeMeal = require("./dailyNutritions/removeMeal");
@@ -40,5 +40,5 @@ module.exports = {
   verifyKey,
   saveNewPassword,
   resendEmail,
-  verify,
+  verificateEmail,
 };

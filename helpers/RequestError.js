@@ -4,6 +4,7 @@ const messages = {
   403: "Forbbiden",
   404: "Not found",
   409: "Conflict",
+  4011: "Email Not Verified",
 };
 
 const RequestError = (status, message = messages[status]) => {

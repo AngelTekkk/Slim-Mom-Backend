@@ -1,6 +1,6 @@
 const { User } = require("../../models/user");
 
-const { RequestError, sendEmail } = require("../../helpers");
+const { RequestError, mailJetMessage } = require("../../helpers");
 
 const { APP_URL = "http://localhost:4000" } = process.env;
 
@@ -17,10 +17,13 @@ const resendEmail = async (req, res) => {
   const mail = {
     to: email,
     subject: "Slim-Mom verification email",
-    html: `<a target="_blank" href="${APP_URL}/api/users/verificate/${user.verificationToken}">Click to verify email</a>`,
+    Vars: {
+      link: `${APP_URL}/api/users/verificate/${user?.verificationToken}`,
+    },
+    html: "<h1>Welcome to Slim-mom App!</h1><h3>Please verify your email!<br /> Please click to continue<br /><br /><div style='text-align:center;'><a href='[[var:link]]' target='_blank' rel='noopener noreferrer' style='display: inline-block; padding: 10px 20px; background-color: #3498db; color: #ffffff; text-decoration: none; border-radius: 5px;'>Verify email</a></div>",
   };
 
-  await sendEmail(mail);
+  await mailJetMessage(mail);
 
   res.json({
     message: "Verification email have been sent",
